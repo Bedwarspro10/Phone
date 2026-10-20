@@ -9,19 +9,28 @@ import android.view.accessibility.AccessibilityManager;
 import android.widget.RelativeLayout;
 
 /**
- * Compatibility port of the accessibility-hover behavior from Xiaomi Contacts' DialerItemView.
+ * Fossify-compatible adapter for behavior traced from Xiaomi Contacts' DialerItemView.
  *
- * The original class also depends on Xiaomi DialerModuleUtil, private TTS/accessibility helpers,
- * proprietary layout resources, and Folme setup performed by AnimationUtil. Those dependencies
- * are deliberately not replaced with invented animations here. This view preserves the source
- * behavior that can be implemented with public Android APIs: bounds tracking, touch-exploration
- * hover detection, pressed accessibility feedback, and forwarding the original key description.
- * It remains a RelativeLayout so Fossify's existing key children, IDs, DTMF handlers, speed dial,
- * and click/touch wiring continue to work.
+ * Source-derived behavior retained here:
+ * - tracks the view bounds used by the accessibility hover path;
+ * - on touch-exploration hover exit, briefly sets pressed state and sends click feedback;
+ * - forwards every pressed-state transition through the same listener role used by Xiaomi's
+ *   DialerItemView, so a later Folme adapter can consume the original callback without changing
+ *   Fossify's key IDs or its DTMF/call listeners.
+ *
+ * The original Xiaomi class inflates dialer_item_view and relies on Xiaomi-only resources,
+ * DialerModuleUtil, ScreenModeHelper, TinyScreenUtil and Folme. This class intentionally remains
+ * a RelativeLayout because the existing Fossify dialpad XML supplies the key's child views.
+ * It does not pretend to include Folme or Xiaomi's proprietary typography/resources.
  */
 public class HyperOSDialerItemView extends RelativeLayout {
+    public interface OnPressedListener {
+        void onPressed(View view, boolean pressed);
+    }
+
     private final Rect hitBounds = new Rect();
     private AccessibilityManager accessibilityManager;
+    private OnPressedListener onPressedListener;
 
     public HyperOSDialerItemView(Context context) {
         this(context, null);
@@ -41,6 +50,20 @@ public class HyperOSDialerItemView extends RelativeLayout {
         setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_YES);
     }
 
+    /** Matches the listener hook exposed by the original Xiaomi DialerItemView. */
+    public void setOnPressedListener(OnPressedListener listener) {
+        onPressedListener = listener;
+    }
+
+    @Override
+    public void setPressed(boolean pressed) {
+        super.setPressed(pressed);
+        OnPressedListener listener = onPressedListener;
+        if (listener != null) {
+            listener.onPressed(this, pressed);
+        }
+    }
+
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
@@ -57,15 +80,11 @@ public class HyperOSDialerItemView extends RelativeLayout {
             int y = (int) event.getY();
             if (x != 0 && y != 0 && hitBounds.contains(x, y)) {
                 setPressed(true);
-                sendAccessibilityEvent(android.view.accessibility.AccessibilityEvent.TYPE_VIEW_CLICKED);
+                sendAccessibilityEvent(
+                        android.view.accessibility.AccessibilityEvent.TYPE_VIEW_CLICKED);
                 setPressed(false);
             }
         }
         return super.onHoverEvent(event);
-    }
-
-    @Override
-    public boolean dispatchHoverEvent(MotionEvent event) {
-        return super.dispatchHoverEvent(event);
     }
 }
