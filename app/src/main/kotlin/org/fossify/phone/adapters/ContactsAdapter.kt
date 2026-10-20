@@ -350,6 +350,7 @@ class ContactsAdapter(
     private fun setupView(binding: ItemViewBinding, contact: Contact, holder: ViewHolder) {
         binding.apply {
             root.setupViewBackground(activity)
+            applyHyperOsInspiredRowGeometry(root, itemContactImage)
             itemContactFrame.isSelected = selectedKeys.contains(contact.rawId)
 
             itemContactImage.apply {
@@ -423,6 +424,28 @@ class ContactsAdapter(
                 SimpleContactsHelper(root.context).loadContactImage(contact.photoUri, itemContactImage, contact.getNameToDisplay())
             }
         }
+    }
+
+    /**
+     * Applies the verified Xiaomi contact-row geometry to Fossify's existing row
+     * without replacing Commons' ViewBinding layout or changing contact behaviour.
+     * Xiaomi's proprietary HyperCellLayout is not used here; this is a safe visual port.
+     */
+    private fun applyHyperOsInspiredRowGeometry(row: View, avatar: ImageView) {
+        val density = row.resources.displayMetrics.density
+        fun dp(value: Int) = (value * density).toInt()
+
+        avatar.layoutParams = avatar.layoutParams.apply {
+            width = dp(40)
+            height = dp(40)
+            if (this is ViewGroup.MarginLayoutParams) {
+                marginEnd = dp(16)
+            }
+        }
+
+        // Keep rows comfortably tappable while preserving the Commons row's own
+        // constraints, background, theme colours, and selection treatment.
+        row.minimumHeight = maxOf(row.minimumHeight, dp(64))
     }
 
     override fun onRowMoved(fromPosition: Int, toPosition: Int) {
