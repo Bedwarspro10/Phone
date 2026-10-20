@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Values taken from the supplied HyperOS 4 dialer resources (standard-density values). -->
+    <dimen name="hyperos_dialpad_padding_top">13dp</dimen>
+    <dimen name="hyperos_dialpad_shadow_height">14.1dp</dimen>
+</resources>
