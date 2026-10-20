@@ -135,10 +135,12 @@ class DialpadActivity : SimpleActivity() {
                 dialpadPlusHolder,
                 dialpadAsteriskHolder,
                 dialpadHashtagHolder
-            ).forEach {
-                it.background =
-                    ResourcesCompat.getDrawable(resources, R.drawable.pill_background, theme)
-                it.background?.alpha = LOWER_ALPHA_INT
+            ).forEach { key ->
+                // Keep the Xiaomi source-derived pressed-state selector from dialpad.xml.
+                // Replacing the background here with pill_background disables that selector.
+                key.isDuplicateParentStateEnabled = false
+                key.isFocusable = true
+                key.isClickable = true
             }
         }
 
