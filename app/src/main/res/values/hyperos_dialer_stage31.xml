@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Values extracted from Xiaomi Contacts dialer resources. Names are prefixed to avoid collisions. -->
+    <dimen name="hyperos_dialer_button_pressed_bg_size">56dp</dimen>
+    <dimen name="hyperos_dialer_item_number_text_size">30dp</dimen>
+    <dimen name="hyperos_dialer_item_letter_text_size">9dp</dimen>
+    <dimen name="hyperos_dialer_item_letter_margin_bottom">9.6dp</dimen>
+    <dimen name="hyperos_dialer_pad_height">266dp</dimen>
+    <dimen name="hyperos_dialer_pad_horizontal_padding">24dp</dimen>
+    <dimen name="hyperos_dialer_pad_bottom_padding">7dp</dimen>
+    <dimen name="hyperos_dialer_digits_text_size">26dp</dimen>
+    <dimen name="hyperos_dialer_digits_horizontal_padding">20dp</dimen>
+    <dimen name="hyperos_dialer_digits_clear_button_size">44dp</dimen>
+    <color name="hyperos_dialer_item_number_color">#FF000000</color>
+    <color name="hyperos_dialer_item_letter_color">#FF000000</color>
+</resources>
