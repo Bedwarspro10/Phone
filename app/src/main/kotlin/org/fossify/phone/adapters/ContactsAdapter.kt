@@ -351,6 +351,7 @@ class ContactsAdapter(
         binding.apply {
             root.setupViewBackground(activity)
             applyHyperOsInspiredRowGeometry(root, itemContactImage)
+            applyHyperOsInspiredTouchFeedback(root)
             itemContactFrame.isSelected = selectedKeys.contains(contact.rawId)
 
             itemContactImage.apply {
@@ -426,11 +427,55 @@ class ContactsAdapter(
         }
     }
 
+
     /**
-     * Applies the verified Xiaomi contact-row geometry to Fossify's existing row
-     * without replacing Commons' ViewBinding layout or changing contact behaviour.
-     * Xiaomi's proprietary HyperCellLayout is not used here; this is a safe visual port.
+     * Xiaomi-style touch feedback recreated with Android's built-in view animator.
+     * The decompiled Xiaomi AnimationUtil forwards MotionEvents to Folme's touch
+     * controller and returns false, allowing normal click/long-click handling.
+     * This compatible implementation follows that same event pattern without
+     * importing Xiaomi's proprietary Folme runtime.
      */
+    @SuppressLint("ClickableViewAccessibility")
+    private fun applyHyperOsInspiredTouchFeedback(row: View) {
+        row.setOnTouchListener { view, event ->
+            if (!view.isEnabled) return@setOnTouchListener false
+
+            when (event.actionMasked) {
+                MotionEvent.ACTION_DOWN -> {
+                    view.animate().cancel()
+                    if (view.context.areSystemAnimationsEnabled) {
+                        view.animate()
+                            .scaleX(0.985f)
+                            .scaleY(0.985f)
+                            .alpha(0.94f)
+                            .setDuration(90L)
+                            .setInterpolator(android.view.animation.DecelerateInterpolator())
+                            .start()
+                    }
+                }
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                    view.animate().cancel()
+                    if (view.context.areSystemAnimationsEnabled) {
+                        view.animate()
+                            .scaleX(1f)
+                            .scaleY(1f)
+                            .alpha(1f)
+                            .setDuration(180L)
+                            .setInterpolator(android.view.animation.OvershootInterpolator(0.7f))
+                            .start()
+                    } else {
+                        view.scaleX = 1f
+                        view.scaleY = 1f
+                        view.alpha = 1f
+                    }
+                }
+            }
+            // Keep returning false so Fossify's click, long-click and selection logic works.
+            false
+        }
+    }
+
+    /** Applies Xiaomi-inspired row dimensions without replacing Fossify Commons' binding. */
     private fun applyHyperOsInspiredRowGeometry(row: View, avatar: ImageView) {
         val density = row.resources.displayMetrics.density
         fun dp(value: Int) = (value * density).toInt()
@@ -438,13 +483,8 @@ class ContactsAdapter(
         avatar.layoutParams = avatar.layoutParams.apply {
             width = dp(40)
             height = dp(40)
-            if (this is ViewGroup.MarginLayoutParams) {
-                marginEnd = dp(16)
-            }
+            if (this is ViewGroup.MarginLayoutParams) marginEnd = dp(16)
         }
-
-        // Keep rows comfortably tappable while preserving the Commons row's own
-        // constraints, background, theme colours, and selection treatment.
         row.minimumHeight = maxOf(row.minimumHeight, dp(64))
     }
 
