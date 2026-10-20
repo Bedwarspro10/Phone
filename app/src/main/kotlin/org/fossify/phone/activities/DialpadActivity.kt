@@ -61,6 +61,7 @@ import org.fossify.phone.helpers.DIALPAD_TONE_LENGTH_MS
 import org.fossify.phone.helpers.RecentsHelper
 import org.fossify.phone.helpers.ToneGeneratorHelper
 import org.fossify.phone.models.SpeedDial
+import org.fossify.phone.hyperos.HyperMotionDialpad
 import java.util.Locale
 import kotlin.math.roundToInt
 
@@ -135,12 +136,10 @@ class DialpadActivity : SimpleActivity() {
                 dialpadPlusHolder,
                 dialpadAsteriskHolder,
                 dialpadHashtagHolder
-            ).forEach { key ->
-                // Keep the Xiaomi source-derived pressed-state selector from dialpad.xml.
-                // Replacing the background here with pill_background disables that selector.
-                key.isDuplicateParentStateEnabled = false
-                key.isFocusable = true
-                key.isClickable = true
+            ).forEach {
+                it.background =
+                    ResourcesCompat.getDrawable(resources, R.drawable.pill_background, theme)
+                it.background?.alpha = LOWER_ALPHA_INT
             }
         }
 
@@ -441,9 +440,11 @@ class DialpadActivity : SimpleActivity() {
 
     @SuppressLint("ClickableViewAccessibility")
     private fun setupCharClick(view: View, char: Char, longClickable: Boolean = true) {
+        HyperMotionDialpad.install(view)
         view.isClickable = true
         view.isLongClickable = true
         view.setOnTouchListener { _, event ->
+            HyperMotionDialpad.onTouch(view, event)
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
                     dialpadPressed(char, view)
