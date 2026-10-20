@@ -44,25 +44,28 @@ object HyperMotionDialpad {
         if (holder !is RelativeLayout) return holder
         val existing = holder.findViewWithTag<View>(BACKGROUND_TAG)
         if (existing != null) return existing
+
         val oldBackground = holder.background
         val oldAlpha = oldBackground?.alpha ?: 255
-        val original: Drawable? = oldBackground?.constantState?.newDrawable(holder.resources, holder.context.theme)
-            ?: oldBackground?.mutate()
-        original?.alpha = oldAlpha
-        // Keep the original holder background intact. This layer is only the animated
-        // pressed overlay; removing the holder background would make the key vanish
-        // after ACTION_UP when the overlay alpha reaches zero.
+        val overlayDrawable: Drawable? = oldBackground?.constantState
+            ?.newDrawable(holder.resources, holder.context.theme)?.mutate()
+            ?: oldBackground?.constantState?.newDrawable()?.mutate()
+        overlayDrawable?.alpha = oldAlpha
+
+        // Keep the normal holder background visible at all times. The copied overlay
+        // starts transparent and is only shown while pressed, so it cannot double-darken
+        // the key when idle or make the key disappear after ACTION_UP.
         val layer = View(holder.context).apply {
             tag = BACKGROUND_TAG
-            background = original
+            background = overlayDrawable
             isClickable = false
             isFocusable = false
+            alpha = 0f
         }
         holder.addView(layer, 0, RelativeLayout.LayoutParams(
             RelativeLayout.LayoutParams.MATCH_PARENT,
             RelativeLayout.LayoutParams.MATCH_PARENT
         ))
-        layer.alpha = 1f
         return layer
     }
 
