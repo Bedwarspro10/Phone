@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Xiaomi dialer_item_view.xml structure adapted to public AndroidX/Android views. -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false">
+
+    <TextView
+        android:id="@+id/hyperos_dialer_item_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:textColor="@color/hyperos_dialer_item_number_color"
+        android:textSize="@dimen/hyperos_dialer_item_number_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/hyperos_dialer_item_letter"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/hyperos_dialer_item_letter_margin_bottom"
+        android:gravity="center"
+        android:includeFontPadding="false"
+        android:textColor="@color/hyperos_dialer_item_letter_color"
+        android:textSize="@dimen/hyperos_dialer_item_letter_text_size"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <View
+        android:id="@+id/hyperos_dialer_item_pressed_background"
+        android:layout_width="@dimen/hyperos_dialer_button_pressed_bg_size"
+        android:layout_height="@dimen/hyperos_dialer_button_pressed_bg_size"
+        android:alpha="0"
+        android:background="@drawable/hyperos_dialer_pressed_selector"
+        android:clickable="false"
+        android:focusable="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Standalone panel resource; Stage 32 will wire this into the Fossify activity/layout. -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/hyperos_dialer_background"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:paddingStart="@dimen/hyperos_dialer_pad_horizontal_padding"
+    android:paddingEnd="@dimen/hyperos_dialer_pad_horizontal_padding"
+    android:paddingBottom="@dimen/hyperos_dialer_pad_bottom_padding">
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/hyperos_dialer_pad_height" />
+</FrameLayout>
