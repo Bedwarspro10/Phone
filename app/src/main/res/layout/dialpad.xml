@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<org.fossify.phone.hyperos.HyperOSDialpadGridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/dialpad_holder"
@@ -13,9 +13,9 @@
     android:paddingEnd="@dimen/medium_margin"
     tools:ignore="HardcodedText">
 
-    <org.fossify.phone.hyperos.HyperOSDialerItemView
+    <RelativeLayout
         android:id="@+id/dialpad_1_holder"
-        style="@style/DialpadButtonStyle"
+        style="@style/HyperOSDialpadButtonStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/one"
@@ -32,11 +32,11 @@
             android:layout_alignParentTop="true"
             android:text="1" />
 
-    </org.fossify.phone.hyperos.HyperOSDialerItemView>
+    </RelativeLayout>
 
-    <org.fossify.phone.hyperos.HyperOSDialerItemView
+    <RelativeLayout
         android:id="@+id/dialpad_2_holder"
-        style="@style/DialpadButtonStyle"
+        style="@style/HyperOSDialpadButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/medium_margin"
@@ -60,11 +60,11 @@
             android:layout_below="@+id/dialpad_2"
             android:layout_marginBottom="@dimen/small_margin"
             android:text="ABC" />
-    </org.fossify.phone.hyperos.HyperOSDialerItemView>
+    </RelativeLayout>
 
-    <org.fossify.phone.hyperos.HyperOSDialerItemView
+    <RelativeLayout
         android:id="@+id/dialpad_3_holder"
-        style="@style/DialpadButtonStyle"
+        style="@style/HyperOSDialpadButtonStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/three"
@@ -87,11 +87,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/dialpad_3"
             android:text="DEF" />
-    </org.fossify.phone.hyperos.HyperOSDialerItemView>
+    </RelativeLayout>
 
-    <org.fossify.phone.hyperos.HyperOSDialerItemView
+    <RelativeLayout
         android:id="@+id/dialpad_4_holder"
-        style="@style/DialpadButtonStyle"
+        style="@style/HyperOSDialpadButtonStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/four"
@@ -114,11 +114,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/dialpad_4"
             android:text="GHI" />
-    </org.fossify.phone.hyperos.HyperOSDialerItemView>
+    </RelativeLayout>
 
-    <org.fossify.phone.hyperos.HyperOSDialerItemView
+    <RelativeLayout
         android:id="@+id/dialpad_5_holder"
-        style="@style/DialpadButtonStyle"
+        style="@style/HyperOSDialpadButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/medium_margin"
@@ -142,11 +142,11 @@
             android:layout_below="@+id/dialpad_5"
             android:layout_marginBottom="@dimen/small_margin"
             android:text="JKL" />
-    </org.fossify.phone.hyperos.HyperOSDialerItemView>
+    </RelativeLayout>
 
-    <org.fossify.phone.hyperos.HyperOSDialerItemView
+    <RelativeLayout
         android:id="@+id/dialpad_6_holder"
-        style="@style/DialpadButtonStyle"
+        style="@style/HyperOSDialpadButtonStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/six"
@@ -169,11 +169,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/dialpad_6"
             android:text="MNO" />
-    </org.fossify.phone.hyperos.HyperOSDialerItemView>
+    </RelativeLayout>
 
-    <org.fossify.phone.hyperos.HyperOSDialerItemView
+    <RelativeLayout
         android:id="@+id/dialpad_7_holder"
-        style="@style/DialpadButtonStyle"
+        style="@style/HyperOSDialpadButtonStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/seven"
@@ -196,11 +196,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/dialpad_7"
             android:text="PQRS" />
-    </org.fossify.phone.hyperos.HyperOSDialerItemView>
+    </RelativeLayout>
 
-    <org.fossify.phone.hyperos.HyperOSDialerItemView
+    <RelativeLayout
         android:id="@+id/dialpad_8_holder"
-        style="@style/DialpadButtonStyle"
+        style="@style/HyperOSDialpadButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/medium_margin"
@@ -224,11 +224,11 @@
             android:layout_below="@+id/dialpad_8"
             android:layout_marginBottom="@dimen/small_margin"
             android:text="TUV" />
-    </org.fossify.phone.hyperos.HyperOSDialerItemView>
+    </RelativeLayout>
 
-    <org.fossify.phone.hyperos.HyperOSDialerItemView
+    <RelativeLayout
         android:id="@+id/dialpad_9_holder"
-        style="@style/DialpadButtonStyle"
+        style="@style/HyperOSDialpadButtonStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/nine"
@@ -251,11 +251,11 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/dialpad_9"
             android:text="WXYZ" />
-    </org.fossify.phone.hyperos.HyperOSDialerItemView>
+    </RelativeLayout>
 
-    <org.fossify.phone.hyperos.HyperOSDialerItemView
+    <RelativeLayout
         android:id="@+id/dialpad_asterisk_holder"
-        style="@style/DialpadButtonStyle"
+        style="@style/HyperOSDialpadButtonStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/asterisk"
@@ -271,11 +271,11 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
             android:text="*" />
-    </org.fossify.phone.hyperos.HyperOSDialerItemView>
+    </RelativeLayout>
 
-    <org.fossify.phone.hyperos.HyperOSDialerItemView
+    <RelativeLayout
         android:id="@+id/dialpad_0_holder"
-        style="@style/DialpadButtonStyle"
+        style="@style/HyperOSDialpadButtonStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/medium_margin"
@@ -300,11 +300,11 @@
             android:layout_marginBottom="@dimen/small_margin"
             android:text="+" />
 
-    </org.fossify.phone.hyperos.HyperOSDialerItemView>
+    </RelativeLayout>
 
-    <org.fossify.phone.hyperos.HyperOSDialerItemView
+    <RelativeLayout
         android:id="@+id/dialpad_plus_holder"
-        style="@style/DialpadButtonStyle"
+        style="@style/HyperOSDialpadButtonStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/zero"
@@ -322,11 +322,11 @@
             android:layout_centerInParent="true"
             android:text="+" />
 
-    </org.fossify.phone.hyperos.HyperOSDialerItemView>
+    </RelativeLayout>
 
-    <org.fossify.phone.hyperos.HyperOSDialerItemView
+    <RelativeLayout
         android:id="@+id/dialpad_hashtag_holder"
-        style="@style/DialpadButtonStyle"
+        style="@style/HyperOSDialpadButtonStyle"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:contentDescription="@string/hashtag"
@@ -343,5 +343,5 @@
             android:layout_centerInParent="true"
             android:text="#" />
 
-    </org.fossify.phone.hyperos.HyperOSDialerItemView>
-</org.fossify.phone.hyperos.HyperOSDialpadGridLayout>
+    </RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
